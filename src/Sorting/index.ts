@@ -1,13 +1,25 @@
 
-export class Sort <T> {
-    compare: (a : T, b: T) => number
+export class Sort<T> {
+    compare: (a: T, b: T) => number
     trace: T[][]
 
-    constructor(compare: (a: T, b: T) => number){
-        this.compare = compare
+    constructor(compare?: (a: T, b: T) => number | null) {
+        if (compare) {
+            this.compare = compare
+        } else {
+            this.compare = (a: T, b: T) => {
+                if (a < b) {
+                    return -1;
+                }
+                if (b < a) {
+                    return 1;
+                }
+                return 0;
+            };
+        }
     }
 
-    sort = (a : T[]) : T[] => a
+    sort = (a: T[]): T[] => a
 
     less = (v: T, w: T): boolean => this.compare(v, w) < 0
 
@@ -31,12 +43,12 @@ export class Sort <T> {
         return this.trace.map(this.show)
     }
 
-    isSorted = (a : T[]): boolean => {
-        for(let i : number = 1; i < a.length; i++){
-            if(this.less(a[i], a[i-1])){
+    isSorted = (a: T[]): boolean => {
+        for (let i: number = 1; i < a.length; i++) {
+            if (this.less(a[i], a[i - 1])) {
                 return false
             }
         }
         return true
-    } 
+    }
 }
