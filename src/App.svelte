@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Selection } from './Sorting/Selection'
+	import { Insertion } from './Sorting/Insertion'
 
 	const compare = (a: number, b: number) => {
 		if(a < b){
@@ -12,9 +13,11 @@
 	}
 
 	const selection = new Selection(compare)
+	const insertion = new Insertion(compare)
 
 	const unsorted: number[] = [8, 100, 2,5, 7, 4, 3, 5, 11, 8]
 	selection.sort(unsorted)
+	insertion.sort(unsorted)
 
 </script>
 
@@ -22,6 +25,11 @@
 	
 	<h1>Selection sort</h1>
 	{#each selection.showTrace() as trace}
+		{trace} <br />
+	{/each}
+
+	<h1>Insertion sort</h1>
+	{#each insertion.showTrace() as trace}
 		{trace} <br />
 	{/each}
 
