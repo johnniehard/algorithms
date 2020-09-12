@@ -8,30 +8,45 @@
 
   sort.sort(unsorted);
 
-  function audialize(s) {
+  let showTraces = [];
+
+  function audialize(traces) {
+    Tone.Transport.start();
     const now = Tone.now();
-    s.forEach((trace, i) => {
-      showTraces = [...showTraces, trace]
+    traces.forEach((trace, i) => {
       trace.forEach((v, j) => {
-        const lastNote = j === trace.length - 1 && i === s.length - 1;
-        synth.triggerAttackRelease(
-          v * 80,
-          lastNote ? "4n" : "32n",
-          now + 1 * i + 0.05 * j
-        );
+        const lastNote = j === trace.length - 1 && i === traces.length - 1;
+
+        Tone.Transport.scheduleOnce((time) => {
+          const newTraces = [...showTraces];
+
+          if (!newTraces[i]) newTraces.push([]);
+          newTraces[i].push(v);
+          showTraces = newTraces
+
+          synth.triggerAttackRelease(v * 80, lastNote ? "4n" : "32n");
+        }, now + 1 * i + 0.05 * j);
+        
       });
     });
-  }
 
-  let showTraces = [];
+  }
 </script>
 
 <style>
   h1 {
+    cursor: pointer;
+    user-select: none;
     color: #ff3e00;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
+  }
+
+  .sort-trace{
+      display: grid;
+      grid-auto-rows: auto;
+      grid-auto-columns: auto;
   }
 </style>
 
