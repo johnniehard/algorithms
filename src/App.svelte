@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { Selection } from './Sorting/Selection'
 
-	export let name: string;
-
-	const sort = new Selection((a, b) => {
+	const compare = (a: number, b: number) => {
 		if(a < b){
 			return -1
 		}
@@ -11,25 +9,21 @@
 			return 1
 		}
 		return 0
-	})
+	}
+
+	const selection = new Selection(compare)
 
 	const unsorted: number[] = [8, 100, 2,5, 7, 4, 3, 5, 11, 8]
+	selection.sort(unsorted)
 
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-
-	<p>
-		{sort.show(unsorted)}
-	</p>
-	<p>
-		{sort.show(sort.sort(unsorted))}
-	</p>
-	<p>
-		{sort.show(unsorted)}
-	</p>
+	
+	<h1>Selection sort</h1>
+	{#each selection.showTrace() as trace}
+		{trace} <br />
+	{/each}
 
 </main>
 

@@ -1,6 +1,7 @@
 
 export class Sort <T> {
     compare: (a : T, b: T) => number
+    trace: T[][]
 
     constructor(compare: (a: T, b: T) => number){
         this.compare = compare
@@ -20,6 +21,14 @@ export class Sort <T> {
         const s: string = a.join(" ")
         console.log(s)
         return s
+    }
+
+    addTrace = (a: T[]): void => {
+        this.trace = [...this.trace, [...a]]
+    }
+
+    showTrace = (): string[] => {
+        return this.trace.map(this.show)
     }
 
     isSorted = (a : T[]): boolean => {

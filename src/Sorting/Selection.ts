@@ -2,6 +2,7 @@ import { Sort } from './index'
 
 export class Selection<T> extends Sort<T> {
     sort = (a : T[]) : T[] => {
+        this.trace = []
         a = [...a]
         for(let i: number = 0; i < a.length; i++){
             let min: number = i
@@ -11,6 +12,7 @@ export class Selection<T> extends Sort<T> {
                 }
             }
             this.exchange(a, i, min)
+            this.addTrace(a)
         }
         return a
     }
