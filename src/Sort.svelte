@@ -4,23 +4,26 @@
   export let title;
   export let sort;
   export let unsorted;
-  export let synth
+  export let synth;
 
-  sort.sort(unsorted)
+  sort.sort(unsorted);
 
   function audialize(s) {
     const now = Tone.now();
     s.forEach((trace, i) => {
+      showTraces = [...showTraces, trace]
       trace.forEach((v, j) => {
         const lastNote = j === trace.length - 1 && i === s.length - 1;
         synth.triggerAttackRelease(
           v * 80,
-          lastNote ? "4n" : "16n",
+          lastNote ? "4n" : "32n",
           now + 1 * i + 0.05 * j
         );
       });
     });
   }
+
+  let showTraces = [];
 </script>
 
 <style>
@@ -32,7 +35,7 @@
   }
 </style>
 
-<h1>{title}</h1>
-<div on:click={() => audialize(sort.trace)}>
-  {#each sort.showTrace() as trace}{trace} <br />{/each}
+<h1 on:click={() => audialize(sort.trace)}>{title}</h1>
+<div>
+  {#each showTraces as trace}{trace} <br />{/each}
 </div>
