@@ -16,8 +16,10 @@ export class Sort <T> {
         a[j] = t
     }
 
-    show = (a: T[]): void => {
-        console.log(a.join(" "))
+    show = (a: T[]): string => {
+        const s: string = a.join(" ")
+        console.log(s)
+        return s
     }
 
     isSorted = (a : T[]): boolean => {

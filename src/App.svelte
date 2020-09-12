@@ -1,14 +1,19 @@
 <script lang="ts">
-	import { Sort } from './Sorting/index.ts'
+	import { Selection } from './Sorting/Selection'
 
 	export let name: string;
 
-	const sort = new Sort((a, b) => a < b ? -1 : b < a ? 1 : 0)
+	const sort = new Selection((a, b) => {
+		if(a < b){
+			return -1
+		}
+		if(b < a){
+			return 1
+		}
+		return 0
+	})
 
-	const unsorted = [1, 2, 4, 3, 5]
-
-	const isLess = sort.less(1, 3)
-	sort.show(unsorted)
+	const unsorted: number[] = [8, 100, 2,5, 7, 4, 3, 5, 11, 8]
 
 </script>
 
@@ -17,8 +22,15 @@
 	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 
 	<p>
-		{isLess}
+		{sort.show(unsorted)}
 	</p>
+	<p>
+		{sort.show(sort.sort(unsorted))}
+	</p>
+	<p>
+		{sort.show(unsorted)}
+	</p>
+
 </main>
 
 <style>
