@@ -1,4 +1,6 @@
 <script lang="ts">
+	import shuffle from 'lodash.shuffle'
+
   import { Selection } from "./Sorting/Selection";
   import { Insertion } from "./Sorting/Insertion";
 
@@ -9,13 +11,17 @@
   const selection = new Selection();
   const insertion = new Insertion();
 
-  const unsorted: number[] = [8, 20, 2, 5, 7, 4, 3, 5, 11, 8];
+  const unsorted: number[] = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   const synth = new Tone.Synth().toDestination();
+  Tone.Transport.start();
 
 </script>
 
 <style>
+	:global(body) {
+		background: rgba(50, 50, 50, 1);
+	}
   main {
     text-align: center;
     padding: 1em;
@@ -24,7 +30,7 @@
   }
 
   h1 {
-    color: #ff3e00;
+    color: rgba(255, 255, 255, 0.8);
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
@@ -37,6 +43,7 @@
   }
 </style>
 
+<svelte:body />
 <main>
 
 	<Sort
