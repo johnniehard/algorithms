@@ -1,27 +1,28 @@
 <script lang="ts">
-	import shuffle from 'lodash.shuffle'
+  import shuffle from "lodash.shuffle";
 
   import { Selection } from "./Sorting/Selection";
   import { Insertion } from "./Sorting/Insertion";
+  import { Shell } from "./Sorting/Shell";
 
-  import Sort from './Sort.svelte'
+  import Sort from "./Sort.svelte";
 
   import * as Tone from "tone";
 
   const selection = new Selection();
   const insertion = new Insertion();
+  const shell = new Shell();
 
   const unsorted: number[] = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
 
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.start();
-
 </script>
 
 <style>
-	:global(body) {
-		background: rgba(50, 50, 50, 1);
-	}
+  :global(body) {
+    background: rgba(50, 50, 50, 1);
+  }
   main {
     text-align: center;
     padding: 1em;
@@ -45,24 +46,12 @@
 
 <svelte:body />
 <main>
+  <Sort
+    {...{ title: 'Selection sort', unsorted, sort: selection, synth }} />
 
-	<Sort
-		{...{
-			title: "Selection sort",
-			unsorted,
-			sort: selection,
-			synth,
-		}}
-	/>
+  <Sort
+    {...{ title: 'Insertion sort', unsorted, sort: insertion, synth }} />
 
-	<Sort
-	{...{
-		title: "Insertion sort",
-		unsorted,
-		sort: insertion,
-		synth,
-	}}
-/>
-
- 
+  <Sort
+    {...{ title: 'Shellsort', unsorted, sort: shell, synth }} />
 </main>
