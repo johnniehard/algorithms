@@ -1,9 +1,9 @@
 <script>
   import * as Tone from "tone";
-  import { interpolateRainbow, interpolateYlGnBu } from "d3-scale-chromatic";
+  import { interpolateRainbow, interpolateYlGnBu, interpolateYlOrBr } from "d3-scale-chromatic";
   import { scaleOrdinal } from "d3-scale";
 
-  const interpolate = interpolateYlGnBu;
+  const interpolate = interpolateYlOrBr;
   const notes = scaleOrdinal().range([
     "A3",
     "A#3",
@@ -40,8 +40,6 @@
 
   let showTraces = [];
 
-  console.log('NOTES', notes(3))
-
   function audialize(traces) {
     const now = Tone.now();
     traces.forEach((trace, i) => {
@@ -69,8 +67,7 @@
   h1 {
     cursor: pointer;
     user-select: none;
-    /* color: #ff3e00; */
-    color: white;
+    color: #ff3e00;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
@@ -78,18 +75,11 @@
 
   .sort-trace {
     margin: 0 auto;
-    /* max-width: 400px; */
     justify-content: center;
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
+    grid-template-columns: 1fr;
     grid-auto-rows: auto;
     /* grid-gap: 5px; */
-  }
-
-  .sort-trace > * {
-    /* border: 1px solid black; */
-    width: 20px;
-    height: 20px;
   }
 
   .container {
@@ -103,9 +93,11 @@
 <div class="container">
   <div class="sort-trace">
     {#each showTraces as trace}
-      {#each trace as value}
-        <div style={`background: ${interpolate(value / 10)}`} />
-      {/each}
+      <svg width="200" height="40">
+        {#each trace as value, i}
+          <rect x={200 * (i / 10 )} height={1 + value * 4} width="10" y={40 - (1 + value * 4)} fill={interpolate((value + 1) / 11)} />
+        {/each}
+      </svg>
     {/each}
   </div>
 </div>

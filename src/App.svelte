@@ -21,7 +21,7 @@
 
 <style>
   :global(body) {
-    background: rgba(50, 50, 50, 1);
+    /* background: rgba(50, 50, 50, 1); */
   }
   main {
     text-align: center;
