@@ -1,8 +1,35 @@
 <script>
   import * as Tone from "tone";
   import { interpolateRainbow, interpolateYlGnBu } from "d3-scale-chromatic";
+  import { scaleOrdinal } from "d3-scale";
 
-  const interpolate = interpolateYlGnBu
+  const interpolate = interpolateYlGnBu;
+  const notes = scaleOrdinal().range([
+    "A3",
+    "A#3",
+    "B3",
+    "C3",
+    "C#3",
+    "D3",
+    "E#3",
+    "E3",
+    "F3",
+    "F#3",
+    "G3",
+    "G#3",
+    "A4",
+    "A#4",
+    "B4",
+    "C4",
+    "C#4",
+    "D4",
+    "E#4",
+    "E4",
+    "F4",
+    "F#4",
+    "G4",
+    "G#4",
+  ]);
 
   export let title;
   export let sort;
@@ -12,6 +39,8 @@
   sort.sort(unsorted);
 
   let showTraces = [];
+
+  console.log('NOTES', notes(3))
 
   function audialize(traces) {
     const now = Tone.now();
@@ -26,7 +55,10 @@
           newTraces[i].push(v);
           showTraces = newTraces;
 
-          synth.triggerAttackRelease(v * 80, lastNote ? "4n" : "32n");
+          synth.triggerAttackRelease(
+            notes(v + 1 / 10),
+            lastNote ? "4n" : "32n"
+          );
         }, now + 1 * i + 0.05 * j);
       });
     });
