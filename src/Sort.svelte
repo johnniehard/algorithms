@@ -12,29 +12,50 @@
   const W = 400;
   const H = 60;
 
-  const interpolate = interpolateCool;
+  const colorSCale = interpolateCool;
 
   const notes = scaleLinear().range([100, 800]);
-  const yScale = scaleLinear().range([1, H])
+  const yScale = scaleLinear().range([1, H]);
+  const valueScale = scaleLinear().range([0, 1]);
 
   export let title;
   export let sort;
   export let unsorted;
   export let synth;
 
- 
   const n = unsorted.length;
   const aExtent = extent(unsorted);
 
+  valueScale.domain(aExtent);
   notes.domain(aExtent);
-  yScale.domain(aExtent)
+  yScale.domain(aExtent);
 
-  const traceTime = .6;
+  const traceTime = 100;
   const noteTime = (traceTime - 0.1) / n;
 
   sort.sort(unsorted);
 
   let showTraces = [];
+  let currentTrace = sort.trace[0];
+
+  let frame = 0;
+  let start;
+
+  function step(timestamp) {
+    if (start === undefined) start = timestamp;
+    const elapsed = timestamp - start;
+
+    if (elapsed > traceTime) {
+      frame += 1;
+      start = timestamp;
+    }
+
+    currentTrace = sort.trace[frame];
+
+    if (frame < sort.trace.length - 1) {
+      requestAnimationFrame(step);
+    }
+  }
 
   function audialize(traces) {
     Tone.start();
@@ -88,22 +109,28 @@
   }
 </style>
 
-<h1 on:click={() => audialize(sort.trace)}>{title}</h1>
+<h1
+  on:click={() => {
+    frame = 0;
+    requestAnimationFrame(step);
+  }}>
+  {title}
+</h1>
 <div class="container">
   <div class="sort-trace">
-    {#each showTraces as trace}
-      <svg width={W} height={H}>
-        {#each trace as value, i}
-          <rect
-            x={W * (i / n)}
-            height={yScale(value)}
-            width={W / n}
-            y={H - yScale(value)}
-            fill={interpolate(value / aExtent[1])}>
-            <text>{notes(value)}</text>
-          </rect>
-        {/each}
-      </svg>
-    {/each}
+    <!-- {#each showTraces as trace} -->
+    <svg width={W} height={H}>
+      {#each currentTrace as value, i}
+        <rect
+          x={W * (i / n)}
+          height={yScale(value)}
+          width={W / n}
+          y={H - yScale(value)}
+          fill={colorSCale(valueScale(value))}>
+          <text>{notes(value)}</text>
+        </rect>
+      {/each}
+    </svg>
+    <!-- {/each} -->
   </div>
 </div>

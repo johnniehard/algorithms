@@ -15,9 +15,9 @@ export class Shell<T> extends Sort<T> {
             for (let i = h; i < n; i++) {
                 for (let j = i; j >= h && this.less(a[j], a[j - h]); j -= h) {
                     this.exchange(a, j, j - h)
+                    this.addTrace(a)
                 }
             }
-            this.addTrace(a)
             h = Math.round(h / 3)
         }
         return a
