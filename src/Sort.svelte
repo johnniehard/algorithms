@@ -9,22 +9,25 @@
   import { scaleLinear } from "d3-scale";
   import { extent } from "d3-array";
 
+  const W = 400;
+  const H = 60;
+
   const interpolate = interpolateCool;
 
   const notes = scaleLinear().range([100, 800]);
+  const yScale = scaleLinear().range([1, H])
 
   export let title;
   export let sort;
   export let unsorted;
   export let synth;
 
-  const W = 400;
-  const H = 60;
-
+ 
   const n = unsorted.length;
   const aExtent = extent(unsorted);
 
   notes.domain(aExtent);
+  yScale.domain(aExtent)
 
   const traceTime = .6;
   const noteTime = (traceTime - 0.1) / n;
@@ -93,9 +96,9 @@
         {#each trace as value, i}
           <rect
             x={W * (i / n)}
-            height={((value + 1) / aExtent[1]) * H}
+            height={yScale(value)}
             width={W / n}
-            y={H - ((value + 1) / aExtent[1]) * H}
+            y={H - yScale(value)}
             fill={interpolate(value / aExtent[1])}>
             <text>{notes(value)}</text>
           </rect>
