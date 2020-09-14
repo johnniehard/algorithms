@@ -14,7 +14,7 @@
   const insertion = new Insertion();
   const shell = new Shell();
 
-  const unsorted: number[] = shuffle(range(20));
+  const unsorted: number[] = shuffle(range(100));
 
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.start();
@@ -22,20 +22,15 @@
 
 <style>
   :global(body) {
+    background: rgb(252, 252, 252);
     /* background: rgba(50, 50, 50, 1); */
   }
   main {
     text-align: center;
     padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: rgba(255, 255, 255, 0.8);
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
+    display: grid;
+    justify-content: center;
+    grid-gap: 10px;
   }
 
   @media (min-width: 640px) {

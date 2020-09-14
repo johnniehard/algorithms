@@ -30,30 +30,33 @@
   notes.domain(aExtent);
   yScale.domain(aExtent);
 
-  const traceTime = 100;
-  const noteTime = (traceTime - 0.1) / n;
+  // const traceTime = 16.6;
+  // const noteTime = (traceTime - 0.1) / n;
 
   sort.sort(unsorted);
 
-  let showTraces = [];
+  // let showTraces = [];
   let currentTrace = sort.trace[0];
 
   let frame = 0;
-  let start;
+  // let start;
+  let playing = false;
 
   function step(timestamp) {
-    if (start === undefined) start = timestamp;
-    const elapsed = timestamp - start;
+    // if (start === undefined) start = timestamp;
+    // const elapsed = timestamp - start;
 
-    if (elapsed > traceTime) {
+    // if (elapsed > traceTime) {
       frame += 1;
-      start = timestamp;
-    }
+      // start = timestamp;
+    // }
 
     currentTrace = sort.trace[frame];
 
     if (frame < sort.trace.length - 1) {
       requestAnimationFrame(step);
+    } else {
+      playing = false;
     }
   }
 
@@ -80,32 +83,49 @@
 
 <style>
   h1 {
-    color: #ff3e00;
+    color: gray;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
+    margin-top: 0;
   }
 
+  .container {
+    background: rgb(252, 252, 252);   
+    cursor: pointer;
+    padding: 5px;
+    transition: background 0.2s ease;
+    border-radius: 10px;
+  }
+
+  .container:hover, .playing {
+    background: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.01);
+  }
+
+  .playing h1{
+    color: black;
+  }
 </style>
 
-<div class="container">
-  <h1
-    on:click={() => {
-      frame = 0;
-      requestAnimationFrame(step);
-    }}>
-    {title}
-  </h1>
-    <svg width={W} height={H}>
-      {#each currentTrace as value, i}
-        <rect
-          x={W * (i / n)}
-          height={yScale(value)}
-          width={W / n}
-          y={H - yScale(value)}
-          fill={colorSCale(valueScale(value))}>
-          <text>{notes(value)}</text>
-        </rect>
-      {/each}
-    </svg>
+<div
+  class={`container ${playing ? 'playing' : ''}`}
+  on:click={() => {
+    playing = true;
+    frame = 0;
+    requestAnimationFrame(step);
+  }}>
+  <h1>{title}</h1>
+  <svg width={W} height={H}>
+    {#each currentTrace as value, i}
+      <rect
+        x={W * (i / n)}
+        height={yScale(value)}
+        width={W / n}
+        y={H - yScale(value)}
+        fill={colorSCale(valueScale(value))}>
+        <text>{notes(value)}</text>
+      </rect>
+    {/each}
+  </svg>
 </div>
