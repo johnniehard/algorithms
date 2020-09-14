@@ -5,6 +5,7 @@
   import { Selection } from "./Sorting/Selection";
   import { Insertion } from "./Sorting/Insertion";
   import { Shell } from "./Sorting/Shell";
+  import { Merge } from "./Sorting/Merge";
 
   import Sort from "./Sort.svelte";
 
@@ -13,6 +14,7 @@
   const selection = new Selection();
   const insertion = new Insertion();
   const shell = new Shell();
+  const merge = new Merge();
 
   const unsorted: number[] = shuffle(range(100));
 
@@ -47,4 +49,6 @@
   <Sort {...{ title: 'Insertion sort', unsorted, sort: insertion, synth }} />
 
   <Sort {...{ title: 'Shellsort', unsorted, sort: shell, synth }} />
+
+  <Sort {...{ title: 'Mergesort', unsorted, sort: merge, synth }} />
 </main>
