@@ -80,45 +80,22 @@
 
 <style>
   h1 {
-    cursor: pointer;
-    user-select: none;
-    /* color: #ff3e00; */
-    color: black;
+    color: #ff3e00;
     text-transform: uppercase;
     font-size: 4em;
     font-weight: 100;
   }
 
-  .sort-trace {
-    margin: 0 auto;
-    justify-content: center;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    /* grid-gap: 5px; */
-  }
-
-  .container {
-    display: grid;
-    justify-content: center;
-    align-items: center;
-  }
-
-  svg {
-    margin-bottom: 4px;
-  }
 </style>
 
-<h1
-  on:click={() => {
-    frame = 0;
-    requestAnimationFrame(step);
-  }}>
-  {title}
-</h1>
 <div class="container">
-  <div class="sort-trace">
-    <!-- {#each showTraces as trace} -->
+  <h1
+    on:click={() => {
+      frame = 0;
+      requestAnimationFrame(step);
+    }}>
+    {title}
+  </h1>
     <svg width={W} height={H}>
       {#each currentTrace as value, i}
         <rect
@@ -131,6 +108,4 @@
         </rect>
       {/each}
     </svg>
-    <!-- {/each} -->
-  </div>
 </div>
