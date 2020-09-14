@@ -34,6 +34,7 @@
   let showTraces = [];
 
   function audialize(traces) {
+    Tone.start();
     const now = Tone.now();
     traces.forEach((trace, i) => {
       trace.forEach((v, j) => {
