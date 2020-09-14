@@ -1,5 +1,6 @@
 <script lang="ts">
   import shuffle from "lodash.shuffle";
+  import range from "lodash.range";
 
   import { Selection } from "./Sorting/Selection";
   import { Insertion } from "./Sorting/Insertion";
@@ -13,7 +14,7 @@
   const insertion = new Insertion();
   const shell = new Shell();
 
-  const unsorted: number[] = shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  const unsorted: number[] = shuffle(range(10));
 
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.start();
@@ -46,12 +47,9 @@
 
 <svelte:body />
 <main>
-  <Sort
-    {...{ title: 'Selection sort', unsorted, sort: selection, synth }} />
+  <Sort {...{ title: 'Selection sort', unsorted, sort: selection, synth }} />
 
-  <Sort
-    {...{ title: 'Insertion sort', unsorted, sort: insertion, synth }} />
+  <Sort {...{ title: 'Insertion sort', unsorted, sort: insertion, synth }} />
 
-  <Sort
-    {...{ title: 'Shellsort', unsorted, sort: shell, synth }} />
+  <Sort {...{ title: 'Shellsort', unsorted, sort: shell, synth }} />
 </main>
