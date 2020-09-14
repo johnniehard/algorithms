@@ -14,7 +14,7 @@
   const insertion = new Insertion();
   const shell = new Shell();
 
-  const unsorted: number[] = shuffle(range(10));
+  const unsorted: number[] = shuffle(range(20));
 
   const synth = new Tone.Synth().toDestination();
   Tone.Transport.start();

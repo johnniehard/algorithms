@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import * as Tone from "tone";
   import {
     interpolateRainbow,
@@ -6,38 +6,12 @@
     interpolateYlOrBr,
     interpolateCool,
   } from "d3-scale-chromatic";
-  import { scaleOrdinal } from "d3-scale";
+  import { scaleLinear } from "d3-scale";
   import { extent } from "d3-array";
 
   const interpolate = interpolateCool;
-  const scale = [
-    "A3",
-    "A#3",
-    "B3",
-    "C3",
-    "C#3",
-    "D3",
-    "E3",
-    "E#3",
-    "F3",
-    "F#3",
-    "G3",
-    "G#3",
-    "A4",
-    "A#4",
-    "B4",
-    "C4",
-    "C#4",
-    "D4",
-    "E4",
-    "E#4",
-    "F4",
-    "F#4",
-    "G4",
-    "G#4",
-  ];
 
-  const notes = scaleOrdinal().range(scale);
+  const notes = scaleLinear().range([100, 800]);
 
   export let title;
   export let sort;
@@ -52,7 +26,7 @@
 
   notes.domain(aExtent);
 
-  const traceTime = 1  ;
+  const traceTime = .6;
   const noteTime = (traceTime - 0.1) / n;
 
   sort.sort(unsorted);
@@ -103,6 +77,10 @@
     display: grid;
     justify-content: center;
     align-items: center;
+  }
+
+  svg {
+    margin-bottom: 4px;
   }
 </style>
 
