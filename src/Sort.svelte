@@ -1,18 +1,12 @@
 <script lang="typescript">
   import * as Tone from "tone";
-  import {
-    interpolateRainbow,
-    interpolateYlGnBu,
-    interpolateYlOrBr,
-    interpolateCool,
-  } from "d3-scale-chromatic";
   import { scaleLinear } from "d3-scale";
   import { extent } from "d3-array";
 
   const W = 400;
   const H = 60;
 
-  const colorSCale = interpolateCool;
+  export let colorScale;
 
   const notes = scaleLinear().range([100, 800]);
   const yScale = scaleLinear().range([1, H]);
@@ -47,8 +41,8 @@
     // const elapsed = timestamp - start;
 
     // if (elapsed > traceTime) {
-      frame += 1;
-      // start = timestamp;
+    frame += 1;
+    // start = timestamp;
     // }
 
     currentTrace = sort.trace[frame];
@@ -91,19 +85,21 @@
   }
 
   .container {
-    background: rgb(252, 252, 252);   
+    background: rgb(252, 252, 252);
     cursor: pointer;
     padding: 5px;
     transition: background 0.2s ease;
     border-radius: 10px;
   }
 
-  .container:hover, .playing {
+  .container:hover,
+  .playing {
     background: white;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(0, 0, 0, 0.01);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1),
+      -5px -5px 10px rgba(0, 0, 0, 0.01);
   }
 
-  .playing h1{
+  .playing h1 {
     color: black;
   }
 </style>
@@ -113,7 +109,7 @@
   on:click={() => {
     playing = true;
     frame = 0;
-    requestAnimationFrame(step);
+    window.requestAnimationFrame(step);
   }}>
   <h1>{title}</h1>
   <svg width={W} height={H}>
@@ -123,7 +119,7 @@
         height={yScale(value)}
         width={W / n}
         y={H - yScale(value)}
-        fill={colorSCale(valueScale(value))}>
+        fill={colorScale(valueScale(value))}>
         <text>{notes(value)}</text>
       </rect>
     {/each}
