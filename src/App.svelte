@@ -122,6 +122,9 @@
 
   <Sort {...{ title: 'Mergesort', unsorted, sort: merge, synth, colorScale }} />
 
-  <p>
+  <p style="margin-top: 80px;">
+    Working through the chapter on sorting in <a href="https://algs4.cs.princeton.edu/home/">Algorithms, 4th Edition</a>. 
+    Seeing the sorting play out really has helped me get a feel for what the different algorithms are actually doing.</p><p> Or:
+    If I'd spent half as much time on understanding the algorithms as I did the visualization I'd be half decent at sorting by now.
   </p>
 </main>
