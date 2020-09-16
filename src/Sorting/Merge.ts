@@ -24,7 +24,6 @@ export class Merge<T> extends Sort<T> {
     _sort = (a: T[], aux: T[], lo: number, hi: number): T[] => {
         if (hi <= lo) return a;
         let mid: number = Math.floor(lo + (hi - lo) / 2)
-        console.log('MID', hi, lo, mid)
         a = this._sort(a, aux, lo, mid)
         a = this._sort(a, aux, mid + 1, hi)
         a = this.merge(a, aux, lo, mid, hi)
