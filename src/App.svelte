@@ -113,14 +113,14 @@
   </div>
 
   <Sort
-    {...{ title: 'Selection sort', unsorted, sort: selection, synth, colorScale }} />
+    {...{ title: 'Selection sort', unsorted, sort: selection, colorScale }} />
 
   <Sort
-    {...{ title: 'Insertion sort', unsorted, sort: insertion, synth, colorScale }} />
+    {...{ title: 'Insertion sort', unsorted, sort: insertion, colorScale }} />
 
-  <Sort {...{ title: 'Shellsort', unsorted, sort: shell, synth, colorScale }} />
+  <Sort {...{ title: 'Shellsort', unsorted, sort: shell, colorScale }} />
 
-  <Sort {...{ title: 'Mergesort', unsorted, sort: merge, synth, colorScale }} />
+  <Sort {...{ title: 'Mergesort', unsorted, sort: merge, colorScale }} />
 
   <p style="margin-top: 80px;">
     Working through the chapter on sorting in <a href="https://algs4.cs.princeton.edu/home/">Algorithms, 4th Edition</a>. 

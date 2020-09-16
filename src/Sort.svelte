@@ -15,7 +15,7 @@
   export let title;
   export let sort;
   export let unsorted;
-  export let synth;
+  // export let synth;
 
   const n = unsorted.length;
   const aExtent = extent(unsorted);
