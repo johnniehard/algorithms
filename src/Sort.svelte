@@ -90,6 +90,7 @@
     padding: 5px;
     transition: background 0.2s ease;
     border-radius: 10px;
+    max-width: 500px;
   }
 
   .container:hover,
@@ -104,7 +105,7 @@
   }
 
   svg {
-    width: 100%;
+    width: 80%;
     height: auto;
   }
 </style>
