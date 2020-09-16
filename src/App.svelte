@@ -50,6 +50,7 @@
     background: rgb(252, 252, 252);
     padding: 0;
     margin: 0;
+    padding-top: 40px;
     /* background: rgba(50, 50, 50, 1); */
   }
 

@@ -102,6 +102,11 @@
   .playing h1 {
     color: black;
   }
+
+  svg {
+    width: 100%;
+    height: auto;
+  }
 </style>
 
 <div
@@ -112,7 +117,7 @@
     window.requestAnimationFrame(step);
   }}>
   <h1>{title}</h1>
-  <svg width={W} height={H}>
+  <svg viewBox={`0 0 ${W} ${H}`}>
     {#each currentTrace as value, i}
       <rect
         x={W * (i / n)}
