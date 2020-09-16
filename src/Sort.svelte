@@ -1,5 +1,5 @@
 <script lang="typescript">
-  import * as Tone from "tone";
+  // import * as Tone from "tone";
   import { scaleLinear } from "d3-scale";
   import { extent } from "d3-array";
 
@@ -54,25 +54,25 @@
     }
   }
 
-  function audialize(traces) {
-    Tone.start();
-    const now = Tone.now();
-    traces.forEach((trace, i) => {
-      trace.forEach((v, j) => {
-        const lastNote = j === trace.length - 1 && i === traces.length - 1;
+  // function audialize(traces) {
+  //   Tone.start();
+  //   const now = Tone.now();
+  //   traces.forEach((trace, i) => {
+  //     trace.forEach((v, j) => {
+  //       const lastNote = j === trace.length - 1 && i === traces.length - 1;
 
-        Tone.Transport.scheduleOnce((time) => {
-          synth.triggerAttackRelease(notes(v), noteTime);
-          Tone.Draw.schedule(() => {
-            const newTraces = [...showTraces];
-            if (!newTraces[i]) newTraces.push([]);
-            newTraces[i].push(v);
-            showTraces = newTraces;
-          }, time);
-        }, now + traceTime * i + noteTime * j);
-      });
-    });
-  }
+  //       Tone.Transport.scheduleOnce((time) => {
+  //         synth.triggerAttackRelease(notes(v), noteTime);
+  //         Tone.Draw.schedule(() => {
+  //           const newTraces = [...showTraces];
+  //           if (!newTraces[i]) newTraces.push([]);
+  //           newTraces[i].push(v);
+  //           showTraces = newTraces;
+  //         }, time);
+  //       }, now + traceTime * i + noteTime * j);
+  //     });
+  //   });
+  // }
 </script>
 
 <style>

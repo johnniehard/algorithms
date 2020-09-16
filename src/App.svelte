@@ -16,7 +16,7 @@
 
   import Sort from "./Sort.svelte";
 
-  import * as Tone from "tone";
+  // import * as Tone from "tone";
 
   const selection = new Selection();
   const insertion = new Insertion();
@@ -41,8 +41,8 @@
 
   const unsorted: number[] = shuffle(range(100));
 
-  const synth = new Tone.Synth().toDestination();
-  Tone.Transport.start();
+  // const synth = new Tone.Synth().toDestination();
+  // Tone.Transport.start();
 </script>
 
 <style>
